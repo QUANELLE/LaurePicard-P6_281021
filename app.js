@@ -5,9 +5,6 @@ const app = express();
 
 const sauceRoute = require("./routes/SauceRoute");
 const userRoute = require("./routes/UserRoute");
-// app.use((req, res) => {
-//     res.json({ message: "requete ok" });
-// });
 
 mongoose.connect("mongodb+srv://userAdmin:mdpadmin@cluster0.pcyzy.mongodb.net/sauceDatabase?retryWrites=true&w=majority",
     {
@@ -24,14 +21,14 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });
-//  transforme données en json
+
 app.use(express.json());
 
 
 
 app.use('/api/auth', userRoute);
 
-// app.use('/api/sauces', sauceRoute);
+app.use('/api', sauceRoute);
 
 
 module.exports = app;

@@ -5,6 +5,33 @@ POST http://localhost:3000/api/auth/signup HTTP/1.1
  Content-Type: application/json
 
 {
-    "email":"test@gmail.com",
-    "password": "test1"
+    "email":"test6@gmail.com",
+    "password": "test2345"
+}
+###
+POST http://localhost:3000/api/sauces HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": "617c12d47f0a681bfc1a0298",
+    "name":"ketchup" ,
+  "manufacturer":"heintz" ,
+  "description":"rouge" ,
+  "mainPepper":"hot" ,
+  "imageUrl": "url",
+  "heat": 2,
+  "likes": 3,
+  "dislikes": 8,
+  "usersLiked": [],
+  "usersDislikes": []
+}
+###
+GET http://localhost:3000/api/sauces HTTP/1.1
+###
+POST http://localhost:3000/api/auth/login HTTP/1.1
+ Content-Type: application/json
+
+{
+    "email":"test6@gmail.com",
+    "password": "test2345"
 }
