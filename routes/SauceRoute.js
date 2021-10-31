@@ -5,13 +5,13 @@ const sauceCtrl = require('../controllers/SauceController');
 
 
 
-router.post('/sauces', sauceCtrl.createSauce);
-router.post('/sauces/:id/like', sauceCtrl.createLikeSauce);
+router.post('/', sauceCtrl.createSauce);
+router.post('/:id/like', sauceCtrl.createLikeSauce);
 
 
-router.get('/sauces',sauceCtrl.getAllSauces);
-router.delete('/sauces/:id',sauceCtrl.deleteSauce);
-router.put('/sauces/:id',sauceCtrl.modifySauce);
-router.get('/sauces/:id',sauceCtrl.getOneSauce);
+router.get('/',sauceCtrl.getAllSauces);
+router.delete('/:id',sauceCtrl.deleteSauce);
+router.put('/:id',sauceCtrl.modifySauce);
+router.get('/:id',sauceCtrl.getOneSauce);
 
 module.exports = router;

@@ -3,7 +3,7 @@ const User = require("../models/UserModel");
 const bcrypt = require("bcrypt");
 
 
-exports.signup = (req, res) => {
+exports.signup = (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User({
@@ -15,11 +15,11 @@ exports.signup = (req, res) => {
         .catch(error => res.status(400).json({ error }));
     })
     .catch(error => res.status(500).json({ error }));
-
+// next();
 };
 
-exports.login = (req, res) => {
-  console.log("login ok");
+exports.login = (req, res, next) => {
+  // console.log("login ok");
   User.findOne({ email: req.body.email })
     .then(user => {
       if (!user) {
@@ -38,5 +38,5 @@ exports.login = (req, res) => {
         .catch(error => res.status(500).json({ error }));
     })
     .catch(error => res.status(500).json({ error }));
-
+    // next();
 };
