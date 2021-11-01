@@ -1,5 +1,5 @@
 "use strict";
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 
 const sauceSchema = mongoose.Schema({
@@ -16,4 +16,4 @@ const sauceSchema = mongoose.Schema({
   usersDislikes: { type: Array}
 });
 
-module.exports = mongoose.model('Sauce', sauceSchema);
+module.exports = mongoose.model("Sauce", sauceSchema);
