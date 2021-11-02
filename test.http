@@ -3,7 +3,7 @@ POST http://localhost:3000/api/auth/signup HTTP/1.1
  Content-Type: application/json
 
 {
-    "email":"test@gmail.com",
+    "email":"test1@gmail.com",
     "password": "test"
 }
 ###
@@ -18,17 +18,18 @@ Content-Type: application/json
 ###
 POST http://localhost:3000/api/sauces HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTgxMDczYzQ4MWY2NTFjMmZmY2RkNmYiLCJpYXQiOjE2MzU4NDg0MzAsImV4cCI6MTYzNTkzNDgzMH0.Wr7BWzB0L7hC2edit8TNvco57oM_cnOZ03bnBnOsNKo"
 
 
 {
-    "userId": "617fb0d048c8063ec103cdd9",
-    "name":"bourguignone" ,
+    "userId": "6181073c481f651c2ffcdd6f",
+    "name":"ketchup" ,
   "manufacturer":"heintz" ,
-  "description":"orange" ,
-  "mainPepper":"doux" ,
+  "description":"rouge" ,
+  "mainPepper":"piment" ,
   "imageUrl": "url",
-  "heat": 2,
-  "likes": 3,
+  "heat": 1,
+  "likes": 1,
   "dislikes": 8,
   "usersLiked": [],
   "usersDislikes": []
@@ -36,6 +37,24 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/api/sauces HTTP/1.1
 ###
-GET http://localhost:3000/api/sauces/617c29590028e9a39c06204b HTTP/1.1
+GET http://localhost:3000/api/sauces/618109f56a299e4efb630418 HTTP/1.1
 
 ###
+PUT http://localhost:3000/api/sauces/618109f56a299e4efb630418 HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": "617fb0d048c8063ec103cdd9",
+    "name":"bourguignone" ,
+  "manufacturer":"amora" ,
+  "description":"orange" ,
+  "mainPepper":"tomate" ,
+  "imageUrl": "url",
+  "heat": 8,
+  "likes": 3,
+  "dislikes": 8,
+  "usersLiked": [],
+  "usersDislikes": []
+}
+###
+DELETE http://localhost:3000/api/sauces/618109f56a299e4efb630418 HTTP/1.1

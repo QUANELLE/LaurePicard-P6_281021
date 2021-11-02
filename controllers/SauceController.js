@@ -19,7 +19,7 @@ exports.createLikeSauce = (req, res) => {
 exports.modifySauce = (req, res) => {
 
   Sauce.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
-    .then(sauce => res.status(200).json({ message: "sauce update" }))
+    .then((sauce) => res.status(200).json({ message: "sauce update",sauce }))
     .catch((error) => res.status(400).json({ error }));
 };
 
@@ -32,9 +32,10 @@ exports.getOneSauce = (req, res) => {
 
 exports.deleteSauce = (req, res) => {
 
-  Sauce.delete({ _id: req.params.id })
-    .then(sauce => res.status(200).json({ message: "sauce supprimée" }))
-    .catch((error) => res.status(400).json({ error }));
+  Sauce.deleteOne({ _id: req.params.id })
+  .then(sauce => res.status(200).json({ message: "sauce supprimée" }))
+  .catch((error) => res.status(400).json({ error }));
+  console.log(req.params.id);
 };
 
 exports.getAllSauces = (req, res) => {

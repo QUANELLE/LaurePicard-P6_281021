@@ -4,16 +4,19 @@ const jwt = require("jsonwebtoken");
 module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+    console.log(token);
+    const decodedToken = jwt.verify(token, `${RANDOM_TOKEN_SECRET}`);
+    console.log(decodedToken);
     const userId = decodedToken.userId;
+    console.log(userId);
     if (req.body.userId && req.body.userId !== userId) {
       throw "utilisateur non valable";
     } else {
       next();
     }
-  } catch {
+  } catch(err) {
     res.status(401).json({
-      error: error|"requête invalide"
+      error: err|"requête invalide"
     });
   }
 };
