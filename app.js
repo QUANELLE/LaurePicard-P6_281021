@@ -2,11 +2,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-
 const sauceRoute = require("./routes/SauceRoute");
 const userRoute = require("./routes/UserRoute");
 
-mongoose.connect("mongodb+srv://userAdmin:mdpadmin@cluster0.pcyzy.mongodb.net/sauceDatabase?retryWrites=true&w=majority",
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.pcyzy.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true

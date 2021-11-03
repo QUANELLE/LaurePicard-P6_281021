@@ -18,7 +18,7 @@ Content-Type: application/json
 ###
 POST http://localhost:3000/api/sauces HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTgxMDczYzQ4MWY2NTFjMmZmY2RkNmYiLCJpYXQiOjE2MzU4NDg0MzAsImV4cCI6MTYzNTkzNDgzMH0.Wr7BWzB0L7hC2edit8TNvco57oM_cnOZ03bnBnOsNKo"
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTgxMDczYzQ4MWY2NTFjMmZmY2RkNmYiLCJpYXQiOjE2MzU5MzExMzAsImV4cCI6MTYzNjAxNzUzMH0.ToGT9fg0cuDmQ8ujIr56DtRJpo_nZFBdDv1ONPcmVSI
 
 
 {
@@ -36,15 +36,18 @@ Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTgx
 }
 ###
 GET http://localhost:3000/api/sauces HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTgxMDczYzQ4MWY2NTFjMmZmY2RkNmYiLCJpYXQiOjE2MzU5MzExMzAsImV4cCI6MTYzNjAxNzUzMH0.ToGT9fg0cuDmQ8ujIr56DtRJpo_nZFBdDv1ONPcmVSI
 ###
-GET http://localhost:3000/api/sauces/618109f56a299e4efb630418 HTTP/1.1
+GET http://localhost:3000/api/sauces/61810b0fb421cf9bf61bded8 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTgxMDczYzQ4MWY2NTFjMmZmY2RkNmYiLCJpYXQiOjE2MzU5MzExMzAsImV4cCI6MTYzNjAxNzUzMH0.ToGT9fg0cuDmQ8ujIr56DtRJpo_nZFBdDv1ONPcmVSI
 
 ###
-PUT http://localhost:3000/api/sauces/618109f56a299e4efb630418 HTTP/1.1
+PUT http://localhost:3000/api/sauces/61810b0fb421cf9bf61bded8 HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTgxMDczYzQ4MWY2NTFjMmZmY2RkNmYiLCJpYXQiOjE2MzU5MzExMzAsImV4cCI6MTYzNjAxNzUzMH0.ToGT9fg0cuDmQ8ujIr56DtRJpo_nZFBdDv1ONPcmVSI
 
 {
-    "userId": "617fb0d048c8063ec103cdd9",
+    "userId": "6181073c481f651c2ffcdd6f",
     "name":"bourguignone" ,
   "manufacturer":"amora" ,
   "description":"orange" ,
@@ -57,4 +60,5 @@ Content-Type: application/json
   "usersDislikes": []
 }
 ###
-DELETE http://localhost:3000/api/sauces/618109f56a299e4efb630418 HTTP/1.1
+DELETE http://localhost:3000/api/sauces/61810b0fb421cf9bf61bded8 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTgxMDczYzQ4MWY2NTFjMmZmY2RkNmYiLCJpYXQiOjE2MzU5MzExMzAsImV4cCI6MTYzNjAxNzUzMH0.ToGT9fg0cuDmQ8ujIr56DtRJpo_nZFBdDv1ONPcmVSI
