@@ -7,7 +7,7 @@ const auth = require("../middleware/auth");
 const multer = require("../middleware/multer-config");
 
 router.post("/",auth,multer, sauceCtrl.createSauce);
-router.post("/:id/like",auth, sauceCtrl.createLikeSauce);
+router.post("/:id/like", sauceCtrl.createLikeSauce);
 
 
 router.get("/", sauceCtrl.getAllSauces);
