@@ -30,7 +30,7 @@ exports.createLikeSauce = (req, res) => {
         usersDisliked: sauce.usersDisliked,
         likes: sauce.likes,
         dislikes: sauce.dislikes
-      }
+      };
       // transforme le tableau [usersLiked] en Set
       let setUsersLiked = new Set(likesDislikes.usersLiked);
       
@@ -53,15 +53,15 @@ exports.createLikeSauce = (req, res) => {
         case 0:
           if (setUsersLiked.has(userId)) {
 
-            setUsersLiked.delete(userId)
+            setUsersLiked.delete(userId);
           }
           else {
-            setUsersDisliked.delete(userId)
+            setUsersDisliked.delete(userId);
           }
           break;
         default:
           console.log("problème!");
-      };
+      }
 
       // retransforme le Set en tableau [usersLiked]
       likesDislikes.usersLiked = Array.from(new Set(setUsersLiked));

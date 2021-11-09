@@ -1,18 +1,17 @@
 "use strict";
 
 const express = require("express");
-const router = express.Router();
+const Router = express.Router();
 const sauceCtrl = require("../controllers/SauceController");
 const auth = require("../middleware/auth");
 const multer = require("../middleware/multer-config");
 
-router.post("/",auth,multer, sauceCtrl.createSauce);
-router.post("/:id/like", sauceCtrl.createLikeSauce);
+Router.post("/", auth, multer, sauceCtrl.createSauce);
+Router.post("/:id/like", sauceCtrl.createLikeSauce);
 
+Router.get("/", sauceCtrl.getAllSauces);
+Router.delete("/:id", auth, sauceCtrl.deleteSauce);
+Router.put("/:id", auth, multer, sauceCtrl.modifySauce);
+Router.get("/:id", auth, sauceCtrl.getOneSauce);
 
-router.get("/", sauceCtrl.getAllSauces);
-router.delete("/:id",auth, sauceCtrl.deleteSauce);
-router.put("/:id",auth,multer, sauceCtrl.modifySauce);
-router.get("/:id", auth, sauceCtrl.getOneSauce);
-
-module.exports = router;
+module.exports = Router;
