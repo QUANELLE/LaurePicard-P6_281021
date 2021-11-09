@@ -1,9 +1,11 @@
 "use strict";
-console.log("bonjour le server");
+
 const http = require("http");
 const app = require("./app");
 
-const normalizePort = val => {
+
+
+const normalizePort = (val) => {
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -14,10 +16,11 @@ const normalizePort = val => {
   }
   return false;
 };
-const port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+const port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
 
-const errorHandler = error => {
+const server = http.createServer(app);
+const errorHandler = (error) => {
   if (error.syscall !== "listen") {
     throw error;
   }
@@ -37,10 +40,6 @@ const errorHandler = error => {
   }
 };
 
-const server = http.createServer(app);
-// const server = http.createServer((req, res)=>{
-//   res.end("réponse serveur")
-// });
 
 server.on("error", errorHandler);
 server.on("listening", () => {
@@ -50,4 +49,3 @@ server.on("listening", () => {
 });
 
 server.listen(port);
-
