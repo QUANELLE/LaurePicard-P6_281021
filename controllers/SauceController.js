@@ -20,12 +20,12 @@ exports.createSauce = (req, res) => {
 
 // fonction like/dislike
 exports.createLikeSauce = (req, res) => {
-  const userId = req.body.userId;
-  const sauceId = req.params.id;
+  let userId = req.body.userId;
+  let sauceId = req.params.id;
 
   Sauce.findOne({ _id: req.params.id })
     .then((sauce) => {
-      const likesDislikes = {
+      let likesDislikes = {
         usersLiked: sauce.usersLiked,
         usersDisliked: sauce.usersDisliked,
         likes: sauce.likes,
@@ -137,9 +137,7 @@ exports.deleteSauce = (req, res, next) => {
           .catch((error) => res.status(400).json({ error }));
       });
     })
-    .catch((error) => res.status(500).json({ error }));
-
-  console.log(req.params.id);
+    .catch((error) => res.status(500).json({ error })); 
 };
 
 //  afficher toutes les sauces
