@@ -7,7 +7,7 @@ const { set } = require("mongoose");
 // création d'une sauce
 exports.createSauce = (req, res) => {
   const sauceObjet = JSON.parse(req.body.sauce);
-  delete sauceObjet._id; 
+  delete sauceObjet._id;
   const sauce = new Sauce({
     ...sauceObjet,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
@@ -20,23 +20,23 @@ exports.createSauce = (req, res) => {
 
 // fonction like/dislike
 exports.createLikeSauce = (req, res) => {
-  const userId = req.body.userId;
-   const sauceId = req.params.id;
-  
-   Sauce.findOne({ _id: req.params.id })
+  let userId = req.body.userId;
+  let sauceId = req.params.id;
+
+  Sauce.findOne({ _id: req.params.id })
     .then((sauce) => {
-      const likesDislikes = {
+      let likesDislikes = {
         usersLiked: sauce.usersLiked,
         usersDisliked: sauce.usersDisliked,
         likes: sauce.likes,
-        dislikes: sauce.dislikes
+        dislikes: sauce.dislikes,
       };
       // transforme le tableau [usersLiked] en Set
       let setUsersLiked = new Set(likesDislikes.usersLiked);
-      
-      // transforme le tableau [usersDisliked] en Set    
+
+      // transforme le tableau [usersDisliked] en Set
       let setUsersDisliked = new Set(likesDislikes.usersDisliked);
-      
+
       // valeur de retour du like
       let like = req.body.like;
       // traitement des différentes valeurs possibles du like
@@ -52,27 +52,25 @@ exports.createLikeSauce = (req, res) => {
         // suppression du like OU du dislike
         case 0:
           if (setUsersLiked.has(userId)) {
-
             setUsersLiked.delete(userId);
-          }
-          else {
+          } else {
             setUsersDisliked.delete(userId);
           }
           break;
         default:
-          console.log("problème!");
+          console.log("erreur enregistrement like/dislike");
       }
 
       // retransforme le Set en tableau [usersLiked]
       likesDislikes.usersLiked = Array.from(new Set(setUsersLiked));
-      
+
       // retransforme le Set en tableau [usersDisliked]
       likesDislikes.usersDisliked = Array.from(new Set(setUsersDisliked));
-      
-      // likes :nombre d'utilisateurs qui aiment la sauce  
+
+      // likes :nombre d'utilisateurs qui aiment la sauce
       likesDislikes.likes = setUsersLiked.size;
-     
-      // dislikes :nombre d'utilisateurs qui n'aiment pas la sauce  
+
+      // dislikes :nombre d'utilisateurs qui n'aiment pas la sauce
       likesDislikes.dislikes = setUsersDisliked.size;
 
       // mise à jour des nouvelles valeurs de like/dislike
@@ -80,32 +78,35 @@ exports.createLikeSauce = (req, res) => {
         { _id: req.params.id },
         { ...likesDislikes, _id: req.params.id }
       )
-        .then((sauce) => res.status(200).json({ message: "like/dislike enregistré", sauce }))
+        .then((sauce) =>
+          res.status(200).json({ message: "like/dislike enregistré", sauce })
+        )
         .catch((error) => res.status(400).json({ error }));
     })
     .catch((error) => res.status(400).json({ error }));
-
 };
 
 // modifier une sauce
 exports.modifySauce = (req, res) => {
   if (req.file) {
-    Sauce.findOne({ _id: req.params.id })
-      .then((sauce) => {
-        const filename = sauce.imageUrl.split("/images/")[1];
-        fs.unlink(`images/${filename}`, () => {
-          const sauceObjet = {
-            ...JSON.parse(req.body.sauce),
-            imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-          }
-          Sauce.updateOne(
-            { _id: req.params.id },
-            { ...sauceObjet, _id: req.params.id }
+    Sauce.findOne({ _id: req.params.id }).then((sauce) => {
+      const filename = sauce.imageUrl.split("/images/")[1];
+      fs.unlink(`images/${filename}`, () => {
+        const sauceObjet = {
+          ...JSON.parse(req.body.sauce),
+          imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename
+            }`,
+        };
+        Sauce.updateOne(
+          { _id: req.params.id },
+          { ...sauceObjet, _id: req.params.id }
+        )
+          .then((sauce) =>
+            res.status(200).json({ message: "sauce update", sauce })
           )
-            .then((sauce) => res.status(200).json({ message: "sauce update", sauce }))
-            .catch((error) => res.status(400).json({ error }));
-        });
+          .catch((error) => res.status(400).json({ error }));
       });
+    });
   } else {
     const sauceObjet = { ...req.body };
 
@@ -136,9 +137,7 @@ exports.deleteSauce = (req, res, next) => {
           .catch((error) => res.status(400).json({ error }));
       });
     })
-    .catch((error) => res.status(500).json({ error }));
-
-  console.log(req.params.id);
+    .catch((error) => res.status(500).json({ error })); 
 };
 
 //  afficher toutes les sauces
