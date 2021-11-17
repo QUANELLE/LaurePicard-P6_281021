@@ -1,14 +1,14 @@
 "use strict";
 
-const Sauce = require("../models/SauceModel");
-const fs = require("fs");
-const { set } = require("mongoose");
+let Sauce = require("../models/SauceModel");
+let fs = require("fs");
+// let { set } = require("mongoose");
 
 // création d'une sauce
 exports.createSauce = (req, res) => {
-  const sauceObjet = JSON.parse(req.body.sauce);
+  let sauceObjet = JSON.parse(req.body.sauce);
   delete sauceObjet._id;
-  const sauce = new Sauce({
+  let sauce = new Sauce({
     ...sauceObjet,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
   });
@@ -90,9 +90,9 @@ exports.createLikeSauce = (req, res) => {
 exports.modifySauce = (req, res) => {
   if (req.file) {
     Sauce.findOne({ _id: req.params.id }).then((sauce) => {
-      const filename = sauce.imageUrl.split("/images/")[1];
+      let filename = sauce.imageUrl.split("/images/")[1];
       fs.unlink(`images/${filename}`, () => {
-        const sauceObjet = {
+        let sauceObjet = {
           ...JSON.parse(req.body.sauce),
           imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename
             }`,
@@ -108,7 +108,7 @@ exports.modifySauce = (req, res) => {
       });
     });
   } else {
-    const sauceObjet = { ...req.body };
+    let sauceObjet = { ...req.body };
 
     Sauce.updateOne(
       { _id: req.params.id },
@@ -130,7 +130,7 @@ exports.getOneSauce = (req, res) => {
 exports.deleteSauce = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id })
     .then((sauce) => {
-      const filename = sauce.imageUrl.split("/images/")[1];
+      let filename = sauce.imageUrl.split("/images/")[1];
       fs.unlink(`images/${filename}`, () => {
         Sauce.deleteOne({ _id: req.params.id })
           .then((sauce) => res.status(200).json({ message: "sauce supprimée" }))
