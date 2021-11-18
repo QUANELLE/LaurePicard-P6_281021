@@ -2,7 +2,6 @@
 
 let Sauce = require("../models/SauceModel");
 let fs = require("fs");
-// let { set } = require("mongoose");
 
 // création d'une sauce
 exports.createSauce = (req, res) => {
@@ -88,8 +87,11 @@ exports.createLikeSauce = (req, res) => {
 
 // modifier une sauce
 exports.modifySauce = (req, res) => {
+  // cas de changement d'image
   if (req.file) {
-    Sauce.findOne({ _id: req.params.id }).then((sauce) => {
+    Sauce.findOne({ _id: req.params.id })
+    .then((sauce) => {
+      // suppression du fichier image précédent
       let filename = sauce.imageUrl.split("/images/")[1];
       fs.unlink(`images/${filename}`, () => {
         let sauceObjet = {
@@ -97,6 +99,7 @@ exports.modifySauce = (req, res) => {
           imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename
             }`,
         };
+        // prise en compte des nouveaux paramêtres de la sauce
         Sauce.updateOne(
           { _id: req.params.id },
           { ...sauceObjet, _id: req.params.id }
@@ -108,8 +111,8 @@ exports.modifySauce = (req, res) => {
       });
     });
   } else {
+    // mise à jour de la sauce SANS changement d'image
     let sauceObjet = { ...req.body };
-
     Sauce.updateOne(
       { _id: req.params.id },
       { ...sauceObjet, _id: req.params.id }
@@ -137,7 +140,7 @@ exports.deleteSauce = (req, res, next) => {
           .catch((error) => res.status(400).json({ error }));
       });
     })
-    .catch((error) => res.status(500).json({ error })); 
+    .catch((error) => res.status(500).json({ error }));
 };
 
 //  afficher toutes les sauces
