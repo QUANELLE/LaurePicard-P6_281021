@@ -13,7 +13,7 @@ schema
 
 module.exports = (req, res, next) => {
     if (!schema.validate(req.body.password)) {
-        res.status(403).json(schema.validate(req.body.password, { details: true }));
+        res.status(400).json(schema.validate(req.body.password, { details: true }));
     } else {
         next();
     }

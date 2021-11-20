@@ -3,7 +3,7 @@ POST http://localhost:3000/api/auth/signup HTTP/1.1
  Content-Type: application/json
 
 {
-    "email":"bnb@gmail.com",
+    "email":"crypto@gmail.com",
     "password": "testTEST12"
 }
 ###
@@ -12,8 +12,8 @@ Content-Type: application/json
 
 
 {
-    "email":"test6@gmail.com",
-    "password": "test"
+    "email":"crypto@gmail.com",
+    "password": "testTEST12"
 }
 ###
 POST http://localhost:3000/api/sauces HTTP/1.1
