@@ -5,7 +5,7 @@ require("mongoose-type-email");
 
 
 let userSchema = mongoose.Schema({
-  email: { type: mongoose.SchemaTypes.Email, required: true, unique: true },  
+  email: { type: mongoose.SchemaTypes.Email, required: true, unique: true },
   password: { type: String, required: true },
 });
 userSchema.plugin(uniqueValidator);

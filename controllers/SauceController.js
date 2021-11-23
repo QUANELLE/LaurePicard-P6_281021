@@ -90,26 +90,26 @@ exports.modifySauce = (req, res) => {
   // cas de changement d'image
   if (req.file) {
     Sauce.findOne({ _id: req.params.id })
-    .then((sauce) => {
-      // suppression du fichier image précédent
-      let filename = sauce.imageUrl.split("/images/")[1];
-      fs.unlink(`images/${filename}`, () => {
-        let sauceObjet = {
-          ...JSON.parse(req.body.sauce),
-          imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename
-            }`,
-        };
-        // prise en compte des nouveaux paramêtres de la sauce
-        Sauce.updateOne(
-          { _id: req.params.id },
-          { ...sauceObjet, _id: req.params.id }
-        )
-          .then((sauce) =>
-            res.status(200).json({ message: "sauce update", sauce })
+      .then((sauce) => {
+        // suppression du fichier image précédent
+        let filename = sauce.imageUrl.split("/images/")[1];
+        fs.unlink(`images/${filename}`, () => {
+          let sauceObjet = {
+            ...JSON.parse(req.body.sauce),
+            imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename
+              }`,
+          };
+          // prise en compte des nouveaux paramêtres de la sauce
+          Sauce.updateOne(
+            { _id: req.params.id },
+            { ...sauceObjet, _id: req.params.id }
           )
-          .catch((error) => res.status(400).json({ error }));
+            .then((sauce) =>
+              res.status(200).json({ message: "sauce update", sauce })
+            )
+            .catch((error) => res.status(400).json({ error }));
+        });
       });
-    });
   } else {
     // mise à jour de la sauce SANS changement d'image
     let sauceObjet = { ...req.body };

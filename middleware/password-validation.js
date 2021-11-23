@@ -9,7 +9,7 @@ schema
     .has().uppercase()                              // Doit contenir au moins une majuscule
     .has().lowercase()                              // Doit contenir au moins une minusule
     .has().digits()                                // Doit contenir au moins un chiffre
-    .has().not().spaces()  ;                         // espaces interdits
+    .has().not().spaces();                         // espaces interdits
 
 module.exports = (req, res, next) => {
     if (!schema.validate(req.body.password)) {

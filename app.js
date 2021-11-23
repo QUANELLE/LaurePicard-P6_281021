@@ -1,5 +1,6 @@
 "use strict";
 const express = require("express");
+const helmet = require("helmet");
 const mongoose = require("mongoose");
 const app = express();
 const sauceRoute = require("./routes/SauceRoute");
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
   );
   next();
 });
+app.use(helmet());
 
 app.use(express.json());
 

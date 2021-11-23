@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
     let token = req.headers.authorization.split(" ")[1];
     let decodedToken = jwt.verify(
       token,
-      `${process.env.RANDOM_TOKEN_SECRET}`
+      `${process.env.TOKEN_SECRET}`
     );
     let userId = decodedToken.userId;
     if (req.body.userId && req.body.userId !== userId) {
