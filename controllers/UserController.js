@@ -8,7 +8,7 @@ exports.signup = (req, res, next) => {
   bcrypt
     .hash(req.body.password, 10)
     .then((hash) => {
-      const user = new User({
+      let user = new User({
         email: req.body.email,
         password: hash,
       });
@@ -36,7 +36,7 @@ exports.login = (req, res, next) => {
             userId: user._id,
             token: jwt.sign(
               { userId: user._id },
-              `${process.env.RANDOM_TOKEN_SECRET}`,
+              `${process.env.TOKEN_SECRET}`,
               { expiresIn: "24h" }
             ),
           });

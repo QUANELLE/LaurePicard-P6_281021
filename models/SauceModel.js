@@ -1,7 +1,7 @@
 "use strict";
 const mongoose = require("mongoose");
 
-const SauceSchema = mongoose.Schema({
+let sauceSchema = mongoose.Schema({
   userId: { type: String, required: true },
   name: { type: String, required: true },
   manufacturer: { type: String, required: true },
@@ -15,4 +15,4 @@ const SauceSchema = mongoose.Schema({
   usersDisliked: { type: Array },
 });
 
-module.exports = mongoose.model("Sauce", SauceSchema);
+module.exports = mongoose.model("Sauce", sauceSchema);
